@@ -10,6 +10,4 @@ await page.getByRole('link',{name:'Docs'}).click();
 //Step 3: Verify URL contains /docs
 await expect(page).toHaveURL(/.*docs*/);
 
-
-
 });
