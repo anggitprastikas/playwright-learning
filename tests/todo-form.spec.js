@@ -5,14 +5,15 @@ test('Add new to do item and verify it appears', async({page})=>{
 await page.goto('https://demo.playwright.dev/todomvc');
 
 // Step 2: Fill todo input
-const todoInput = page.getByPlaceholder('what needs to be done?');
-await todoInput.fill('Belajar Playwright Day 7');
+const todoInput = page.getByPlaceholder('What needs to be done?');
+await todoInput.fill('Belajar Playwright itu menyenangkan');
 
 // Step 3: Press Enter to submit
 await todoInput.press('Enter');
 
 // Step 4: Verify new todo appears
-const todoItem = page.getByText('Belajar Playwright Day 7');
+const todoItem = page.getByText('Belajar Playwright itu menyenangkan');
 await expect(todoItem).toBeVisible();
+
 
 });
