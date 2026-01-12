@@ -12,8 +12,7 @@ await todoInput.fill('Belajar Playwright itu menyenangkan');
 await todoInput.press('Enter');
 
 // Step 4: Verify new todo appears
-const todoItem = page.getByText('Belajar Playwright itu menyenangkan');
-await expect(todoItem).toBeVisible();
-
+const todoItem = page.locator('.todo-list li').last();
+await expect(todoItem).toHaveText('Belajar Playwright itu menyenangkan');
 
 });
