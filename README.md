@@ -10,13 +10,13 @@ Pemilihan locator harus disesuaikan dengan struktur DOM agar test stabil.
 This repository contains my learning journey and practice project
 as a Manual QA transitioning into QA Automation using **Playwright**.
 
-## Tech Stack
+# Tech Stack
 - Playwright
 - JavaScript
 - Node.js
 - Page Object Model (POM)
 
-## Project Structure
+# Project Structure
 qa-automation-playground/
 ├── pages/
 │ └── TodoPage.js # Page Object (locator & page logic)
@@ -31,9 +31,13 @@ qa-automation-playground/
 - Add multiple todos
 - Prevent adding empty todo (negative scenario)
 
-## How to Run the Tests
+# How to Run the Tests
 ```bash
 npm install
 npx playwright test
 
+-- Day 15 Locator Strategy
+Locator untuk input todo adalah getByRole('textbox')
+Locator untuk list todo bisa berupa getByRole('listitem') atau getByText()
+getByRole lebih aman karena lebih stabil dan tidak bergantung pada struktur CSS yang mudah berubah
 
