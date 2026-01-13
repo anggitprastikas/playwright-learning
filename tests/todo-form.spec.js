@@ -24,4 +24,15 @@ test.describe('Todo App - using POM', () => {
     await expect(lastTodo).toHaveText('Todo kedua');
   });
 
+  test('Should not add empty todo', async ({ page }) => {
+  const todoPage = new TodoPage(page);
+
+  await todoPage.goto();
+  await todoPage.addEmptyTodo();
+
+  const todoItems = page.locator('.todo-list li');
+  await expect(todoItems).toHaveCount(0);
+  });
+
+
 });
