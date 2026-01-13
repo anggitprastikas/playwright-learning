@@ -1,18 +1,12 @@
-import{test,expect} from '@playwright/test';
+import { test, expect } from '@playwright/test';
+import { TodoPage } from '../pages/TodoPage';
 
-test('Add new to do item and verify it appears', async({page})=>{
-// Step 1: Open TodoMVC app
-await page.goto('https://demo.playwright.dev/todomvc');
+test('Add todo using POM', async ({ page }) => {
+  const todoPage = new TodoPage(page);
 
-// Step 2: Fill todo input
-const todoInput = page.getByPlaceholder('What needs to be done?');
-await todoInput.fill('Belajar Playwright itu menyenangkan');
+  await todoPage.goto();
+  await todoPage.addTodo('Belajar Playwright Day 10');
 
-// Step 3: Press Enter to submit
-await todoInput.press('Enter');
-
-// Step 4: Verify new todo appears
-const todoItem = page.locator('.todo-list li').last();
-await expect(todoItem).toHaveText('Belajar Playwright itu menyenangkan');
-
+  const todoItem = await todoPage.getLastTodo();
+  await expect(todoItem).toHaveText('Belajar Playwright Day 10');
 });
