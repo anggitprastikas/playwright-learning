@@ -10,8 +10,7 @@ test.describe('Todo App — Add Todo Feature', () => {
     await todoPage.goto();
     await todoPage.addTodo(todoData.singleTodo);
 
-    await expect(todoPage.getLastTodo())
-      .toHaveText(todoData.singleTodo);
+    await expect(todoPage.getLastTodo()).toHaveText(todoData.singleTodo);
   });
 
   test('should add multiple todos when user submits more than one item', async ({ page }) => {
@@ -23,8 +22,24 @@ test.describe('Todo App — Add Todo Feature', () => {
       await todoPage.addTodo(todo);
     }
 
-    await expect(todoPage.getLastTodo())
-      .toHaveText(todoData.multipleTodos[1]);
+    await expect(todoPage.getLastTodo()).toHaveText(todoData.multipleTodos[1]);
   });
+
+  test('should NOT add todo when input is empty', async ({ page }) => {
+    const todoPage = new TodoPage(page);
+
+    await todoPage.goto();
+    await todoPage.addEmptyTodo();
+    await expect(todoPage.getLastTodo()).toHaveCount(0);
+  });
+
+  test('should add todo with single character', async ({ page }) => {
+    const todoPage = new TodoPage(page);
+
+    await todoPage.goto();
+    await todoPage.addTodo('A');
+    await expect(todoPage.getLastTodo()).toHaveText('A');
+  });
+
 
 });
