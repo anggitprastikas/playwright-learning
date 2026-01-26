@@ -24,11 +24,20 @@ test.describe('Todo App — Add Todo Feature', () => {
     await expect(todoPage.getLastTodo()).toHaveText(todoData.multipleTodos[1]);
   });
 
-  test('should NOT add todo when input is empty', async ({ page }) => {
-  await todoPage.addTodo(todoData.emptyTodo);
+  test('User cannot add todo when input is empty', async ({ page }) => {
+  const todoPage = new TodoPage(page);
 
-  const todoItems = page.locator('.todo-list li');
-  await expect(todoItems).toHaveCount(0);
+    await test.step('Open Todo application', async () => {
+    await todoPage.goto();
+  });
+    await test.step('Submit empty todo input', async () => {
+    await todoPage.addTodo('');
+  });
+    await test.step('Verify no todo is added', async () => {
+    const todoItems = page.locator('.todo-list li');
+    await expect(todoItems).toHaveCount(0);
+  });
+
   });
 
   test('should add todo with single character (edge case)', async ({ page }) => {
